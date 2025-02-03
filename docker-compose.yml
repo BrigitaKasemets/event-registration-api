@@ -1,0 +1,17 @@
+services:
+  db:
+    image: mariadb:latest
+    container_name: sports_db
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: sports_db
+      MYSQL_USER: sports_user
+      MYSQL_PASSWORD: sports_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql   # Andmete püsivaks salvestamiseks
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql # Algskriptide täitmine
+
+volumes:
+  mariadb_data:
